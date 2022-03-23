@@ -4,7 +4,7 @@ import { Button } from '../app/components/button/Button'
 import { Input } from '../app/components/input/Input'
 import { TagFilter } from '../app/components/tag_filter/TagFilter'
 import { Text } from '../app/components/text/Text'
-import { _getEthereumAddressBalance } from '../app/services/blockchain.service'
+import { _getEthereumAddressBalance, _getSolanaAddressBalance } from '../app/services/blockchain.service'
 
 
 const Home: NextPage = () => {
@@ -18,7 +18,8 @@ const Home: NextPage = () => {
 
   const getAddressBalance = (selectedBlockchain: string): void =>
   {
-    selectedBlockchain === "ethereum" ? _getEthereumAddressBalance(setAddressData, inputAddress) : null
+    selectedBlockchain === "ethereum" ? _getEthereumAddressBalance(setAddressData, inputAddress) :
+    selectedBlockchain === "solana" ? _getSolanaAddressBalance(setAddressData, inputAddress) : null
   }
 
   return (
