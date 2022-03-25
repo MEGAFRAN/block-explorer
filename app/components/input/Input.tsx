@@ -1,6 +1,6 @@
 
 
-export const Input = ( {inputData, setInputAddress, placeholder='Type a blockchain address'}: any ) => 
+export const Input = ( {inputData, setInputAddress, placeholder='Blockchain address'}: any ) => 
 {
     return (
 

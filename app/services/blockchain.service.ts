@@ -1,11 +1,10 @@
 import { Dispatch } from "react";
 import { ethers } from "ethers";
-import * as solanaWeb3 from '@solana/web3.js';
 import { INFURA } from "./api/variables";
-import { PublicKey } from "@solana/web3.js";
+import { PublicKey, Connection, clusterApiUrl } from "@solana/web3.js";
 import { LCDClient } from '@terra-money/terra.js';
 
-  // (Fix): the way addressBalance it's shown on the page on mobile ////////////
+  // (Fix): the way addressBalance it's shown on the page on mobile - after data enters layout breaks ////////////
   
 
 //ETHEREUM ADDRESS
@@ -31,7 +30,7 @@ export const _getSolanaAddressBalance = async (setAddressData: Dispatch<any>, ad
 {
   try
   {
-    const SOLANA_CLIENT = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl('devnet'),'confirmed')
+    const SOLANA_CLIENT = new Connection(clusterApiUrl('devnet'),'confirmed')
     const addressBalance = await SOLANA_CLIENT.getBalance( new PublicKey(address) )
     const solanaAddressMessage = `Solana Balance of address # ${address} is: ${addressBalance} SOL`
     setAddressData(solanaAddressMessage)

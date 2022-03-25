@@ -14,8 +14,6 @@ const Home: NextPage = () => {
   const [inputAddress, setInputAddress] = useState<string>('')
   const [addressData, setAddressData] = useState<any>('Here will go the info')
 
-  const address = '0x2ba0A01333b3612d2f22Ff003E4401bf65d01743'
-
   const getAddressBalance = (selectedBlockchain: string): void =>
   {
     selectedBlockchain === "ethereum" ? _getEthereumAddressBalance(setAddressData, inputAddress) :

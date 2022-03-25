@@ -1,10 +1,16 @@
 @import
-  'base/reset';
+  'base/reset',
+  'abstracts/colors';
 
 body {
 
+  font-family: monospace, 'Courier New', Courier, sans-serif;
   font-size: 10px;
-  background-color: black;
+  background-color: $secondary-purple;
+
+  p {
+    color: $primary-white;
+  }
 
 }
 
@@ -17,23 +23,22 @@ main {
   align-items: center;
   font-size: 1.2rem;
   padding: 30px;
-  background-color: white;
 
   .tag-filter__container {
 
     position:relative;
     display:flex;
     width: 100%;
-    border: 1px solid black;
     border-radius: 7px;
-    box-shadow: 0px 2px 12px #9c9c9c;
+    background-color: $primary-purple;
+    box-shadow: 0px 6px 11px $secondary-black;
 
     &:after { 
         display: flex;
         justify-content: flex-end;
         content: "▾";
         flex: 1;
-        color: black;
+        color: $primary-fucsia;
         font-size: 1.8rem;
         padding-right: 12px;
     }
@@ -59,15 +64,16 @@ main {
       display: flex;
       align-items: center;
       padding-left: 12px;
+      color: $primary-white;
     }
 
     .tag-filter__dropdown {
       display: flex;
       flex-direction: column;
-      background-color: #fffffff5;
+      background-color: $primary-white;
       width: 100%;
       padding: 10px;
-      border:1px black solid;
+      border: 1px $secondary-black solid;
       pointer-events: auto;
       position: absolute;
       margin-top: 43px;
@@ -75,10 +81,14 @@ main {
       opacity: 0;
       visibility: hidden;
       transition: visibility 1s;
-      box-shadow: 0px 2px 12px #9c9c9c;
+      box-shadow: 0px 5px 14px $secondary-black;
 
       .tag-filter__dropdown-option{
           margin-bottom: 10px;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          border-bottom: 1px solid $primary-gray;
 
           input.tag {
               margin-right: 12px;
@@ -89,6 +99,7 @@ main {
               font-weight: 600;
               text-transform: capitalize;
               padding: 10px;
+              flex: 1;
           }
       }
 
@@ -96,28 +107,32 @@ main {
 
   }
 
+  .input__container {
+
+    input {
+
+      border: solid 3px $primary-gray;
+      border-radius: 30px;
+      padding: 7px 40px;
+      background-color: $secondary-white;
+      box-shadow: 0px 6px 11px $secondary-black;
+
+    }
+    
+  }
+
   .button__container {
 
     button {
 
       padding: 18px 34px;
+      border: none;
       border-radius: 45px;
-      box-shadow: 0px 2px 12px #9c9c9c;
+      background-color: $primary-fucsia;
+      box-shadow: 0px 6px 11px $secondary-black;
 
     }
 
-  }
-
-  .input__container {
-
-    input {
-
-      border-radius: 30px;
-      padding: 7px 40px;
-      box-shadow: 0px 2px 12px #9c9c9c;
-
-    }
-    
   }
     
 }
