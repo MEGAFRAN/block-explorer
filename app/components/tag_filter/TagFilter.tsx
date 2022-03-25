@@ -1,9 +1,9 @@
 
-export const TagFilter = ({tagsData, title='Default tag title', setSelectedBlockchain}:any) => {
+export const TagFilter = ({tagsData, title='Default tag title', setSelectedBlockchain, dropdownTitle='Select here a blockchain'}:any) => {
 
     let tagList = tagsData.map((tag: any) => (
 
-        <div tabIndex={0} key={tag} className="tag-filter__container--dropdown-option">
+        <div tabIndex={0} key={tag} className="tag-filter__dropdown-option">
 
             <input id={tag} className="tag" type="radio" name="blockchains" 
             onChange={event => setSelectedBlockchain(event.target.id)} /> 
@@ -19,7 +19,9 @@ export const TagFilter = ({tagsData, title='Default tag title', setSelectedBlock
 
         <div tabIndex={0} className="tag-filter__container">
 
-            <div className="tag-filter__container--dropdown">
+            <span className="tag-filter__title">{dropdownTitle}</span> 
+
+            <div className="tag-filter__dropdown">
 
                 {tagsData ? tagList : <div className="tag">{title}</div>}
                 

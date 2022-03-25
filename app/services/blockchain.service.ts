@@ -5,6 +5,9 @@ import { INFURA } from "./api/variables";
 import { PublicKey } from "@solana/web3.js";
 import { LCDClient } from '@terra-money/terra.js';
 
+  // (Fix): the way addressBalance it's shown on the page on mobile ////////////
+  
+
 //ETHEREUM ADDRESS
 export const _getEthereumAddressBalance = async (setAddressData: Dispatch<any>, address: string): Promise<any> =>
 {
@@ -48,7 +51,7 @@ export const _getTerraAddressBalance = async (setAddressData: Dispatch<any>, add
   {
     const TERRA_CLIENT = new LCDClient({URL: 'https://bombay-lcd.terra.dev', chainID: 'bombay-12'})
     const [addressBalance] = await TERRA_CLIENT.bank.balance(address)
-    const terraAddressMessage = `Terra Balance of address # ${address} is: ${addressBalance}`
+    const terraAddressMessage = `Terra Balance of address # ${address} is: ${JSON.stringify(addressBalance.toData())}`
     //Method that terra documentation uses:  addressBalance.toData()
     setAddressData(terraAddressMessage)
     
