@@ -1,5 +1,5 @@
 
-export const TagFilter = ({tagsData, title='Default tag title', setSelectedBlockchain, dropdownTitle='Select here a blockchain'}:any) => {
+export const TagFilter = ({tagsData, title='Default tag title', setSelectedBlockchain, dropdownTitle}:any) => {
 
     let tagList = tagsData.map((tag: any) => (
 
@@ -19,7 +19,7 @@ export const TagFilter = ({tagsData, title='Default tag title', setSelectedBlock
 
         <div tabIndex={0} className="tag-filter__container">
 
-            <span className="tag-filter__title">{dropdownTitle}</span> 
+            <span className="tag-filter__title">{dropdownTitle ? `${dropdownTitle} Network` : 'Select here a blockchain'}</span> 
 
             <div className="tag-filter__dropdown">
 

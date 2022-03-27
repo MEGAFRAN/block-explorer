@@ -1,11 +1,13 @@
 @import
   'base/reset',
-  'abstracts/colors';
+  'abstracts/colors',
+  'base/typography',
+  'base/base';
 
 body {
 
   font-family: monospace, 'Courier New', Courier, sans-serif;
-  font-size: 10px;
+  font-size: 100%;
   background-color: $secondary-purple;
 
   p {
@@ -19,10 +21,10 @@ main {
 
   display: flex;
   flex-flow: column wrap;
-  row-gap: 60px;
+  row-gap: $gap-row-main;
   align-items: center;
-  font-size: 1.2rem;
-  padding: 30px;
+  font-size: $main-size;
+  padding: $padding-main-size;
 
   .tag-filter__container {
 
@@ -65,6 +67,7 @@ main {
       align-items: center;
       padding-left: 12px;
       color: $primary-white;
+      text-transform: capitalize;
     }
 
     .tag-filter__dropdown {
@@ -95,7 +98,7 @@ main {
           }
   
           label {
-              font-size: 1.2rem;
+              font-size: $main-size;
               font-weight: 600;
               text-transform: capitalize;
               padding: 10px;
@@ -111,11 +114,17 @@ main {
 
     input {
 
+      width: clamp(290px, 50vw, 800px);
       border: solid 3px $primary-gray;
       border-radius: 30px;
-      padding: 7px 40px;
+      padding: 7px 0;
       background-color: $secondary-white;
       box-shadow: 0px 6px 11px $secondary-black;
+
+      &::placeholder {
+        text-transform: capitalize;
+        text-align: center;
+      }
 
     }
     
@@ -133,6 +142,14 @@ main {
 
     }
 
+  }
+
+  .text__container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    word-break: break-word;
+    background-color: #060014b3;
   }
     
 }

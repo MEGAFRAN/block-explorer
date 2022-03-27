@@ -12,7 +12,7 @@ const Home: NextPage = () => {
   const BLOCKCHAIN_LIST: string[] = ['ethereum', 'solana', 'terra']
   const [selectedBlockchain, setSelectedBlockchain] = useState<string>('')
   const [inputAddress, setInputAddress] = useState<string>('')
-  const [addressData, setAddressData] = useState<any>('Here will go the info')
+  const [addressData, setAddressData] = useState<any>({})
 
   const getAddressBalance = (selectedBlockchain: string): void =>
   {
@@ -25,10 +25,10 @@ const Home: NextPage = () => {
 
     <main>
 
-      <TagFilter tagsData={BLOCKCHAIN_LIST} setSelectedBlockchain={ setSelectedBlockchain }/>
-      <Input setInputAddress={ setInputAddress}/>
+      <TagFilter tagsData={BLOCKCHAIN_LIST} setSelectedBlockchain={setSelectedBlockchain} dropdownTitle={selectedBlockchain}/>
+      <Input setInputAddress={setInputAddress} placeholder={selectedBlockchain}/>
       <Button handleClick={()=> getAddressBalance(selectedBlockchain) }/>
-      <Text text={addressData}/>
+      <Text blockchainResponse={addressData} />
       
     </main>
     

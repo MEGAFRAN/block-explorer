@@ -3,9 +3,7 @@ import { ethers } from "ethers";
 import { INFURA } from "./api/variables";
 import { PublicKey, Connection, clusterApiUrl } from "@solana/web3.js";
 import { LCDClient } from '@terra-money/terra.js';
-
-  // (Fix): the way addressBalance it's shown on the page on mobile - after data enters layout breaks ////////////
-  
+ 
 
 //ETHEREUM ADDRESS
 export const _getEthereumAddressBalance = async (setAddressData: Dispatch<any>, address: string): Promise<any> =>
@@ -14,10 +12,13 @@ export const _getEthereumAddressBalance = async (setAddressData: Dispatch<any>, 
   {
     const ETHEREUM_CLIENT = new ethers.providers.JsonRpcProvider(`https://mainnet.infura.io/v3/${INFURA.id}`)
     const addressBalance = await ETHEREUM_CLIENT.getBalance(address)
-    const ethereumAddressMessage = `ETH Balance of address # ${address} is: ${ethers.utils.formatEther(addressBalance)} ETH`
-    setAddressData(ethereumAddressMessage)
+    const ethereumResponse ={
+      address: `ETH address # ${address}, has a balance of:`,
+      balance: `${ethers.utils.formatEther(addressBalance)} ETH`
+    } 
+    setAddressData(ethereumResponse)
     
-    return addressBalance
+    return ethereumResponse
   }
   catch (error)
   {
@@ -32,10 +33,13 @@ export const _getSolanaAddressBalance = async (setAddressData: Dispatch<any>, ad
   {
     const SOLANA_CLIENT = new Connection(clusterApiUrl('devnet'),'confirmed')
     const addressBalance = await SOLANA_CLIENT.getBalance( new PublicKey(address) )
-    const solanaAddressMessage = `Solana Balance of address # ${address} is: ${addressBalance} SOL`
-    setAddressData(solanaAddressMessage)
+    const solanaResponse ={
+      address: `Solana address # ${address}, has a balance of:`,
+      balance: `${addressBalance} SOL`
+    } 
+    setAddressData(solanaResponse)
     
-    return addressBalance
+    return solanaResponse
   }
   catch (error)
   {
@@ -50,11 +54,14 @@ export const _getTerraAddressBalance = async (setAddressData: Dispatch<any>, add
   {
     const TERRA_CLIENT = new LCDClient({URL: 'https://bombay-lcd.terra.dev', chainID: 'bombay-12'})
     const [addressBalance] = await TERRA_CLIENT.bank.balance(address)
-    const terraAddressMessage = `Terra Balance of address # ${address} is: ${JSON.stringify(addressBalance.toData())}`
+    const terraResponse ={
+      address: `Terra address # ${address}, has a balance of:`,
+      balance: `${JSON.stringify(addressBalance.toData())}`
+    } 
     //Method that terra documentation uses:  addressBalance.toData()
-    setAddressData(terraAddressMessage)
+    setAddressData(terraResponse)
     
-    return addressBalance
+    return terraResponse
   }
   catch (error)
   {
