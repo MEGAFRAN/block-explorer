@@ -3,6 +3,8 @@ import { ethers } from "ethers";
 import { INFURA } from "./api/variables";
 import { PublicKey, Connection, clusterApiUrl } from "@solana/web3.js";
 import { LCDClient } from '@terra-money/terra.js';
+import serviceObject from "./utils/service-object";
+import { algorandService } from "./service_objects/algorand";
  
 
 //ETHEREUM ADDRESS
@@ -68,6 +70,29 @@ export const _getTerraAddressBalance = async (setAddressData: Dispatch<any>, add
     setAddressData(terraResponse)
     
     return terraResponse
+  }
+  catch (error)
+  {
+    console.error(error)
+  }
+}
+
+//ALGORAND ADDRESS
+export const _getAlgorandAddressBalance = async (setAddressData: Dispatch<any>, address: string): Promise<any> =>
+{
+  try
+  {
+    let responseData = await serviceObject.getSingleData(algorandService, address)
+    const algorandResponse = {
+      addressTitle: 'Algorand address #',
+      address: `${address}`,
+      balanceTitle: 'Has a balance of :',
+      balance: `${responseData.account.amount} ALGO`
+    } 
+
+    setAddressData(algorandResponse)
+    
+    return algorandResponse
   }
   catch (error)
   {
