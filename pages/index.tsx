@@ -12,7 +12,7 @@ const Home: NextPage = () => {
   const BLOCKCHAIN_LIST: string[] = ['ethereum', 'solana', 'terra']
   const [selectedBlockchain, setSelectedBlockchain] = useState<string>('')
   const [inputAddress, setInputAddress] = useState<string>('')
-  const [addressData, setAddressData] = useState<any>({})
+  const [addressData, setAddressData] = useState<any>('')
 
   const getAddressBalance = (selectedBlockchain: string): void =>
   {
@@ -22,16 +22,20 @@ const Home: NextPage = () => {
   }
 
   return (
+    <>
 
-    <main>
+      <a href="./" ><h1 className='blockvista-name'>BlockVista</h1></a>
 
-      <TagFilter tagsData={BLOCKCHAIN_LIST} setSelectedBlockchain={setSelectedBlockchain} dropdownTitle={selectedBlockchain}/>
-      <Input setInputAddress={setInputAddress} placeholder={selectedBlockchain}/>
-      <Button handleClick={()=> getAddressBalance(selectedBlockchain) }/>
-      <Text blockchainResponse={addressData} />
-      
-    </main>
-    
+      <main>
+
+        <TagFilter tagsData={BLOCKCHAIN_LIST} setSelectedBlockchain={setSelectedBlockchain} dropdownTitle={selectedBlockchain}/>
+        <Input setInputAddress={setInputAddress} placeholder={selectedBlockchain}/>
+        <Button handleClick={()=> getAddressBalance(selectedBlockchain) }/>
+        <Text blockchainResponse={addressData} />
+        
+      </main>
+
+    </>
   )
 }
 

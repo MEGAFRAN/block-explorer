@@ -12,8 +12,10 @@ export const _getEthereumAddressBalance = async (setAddressData: Dispatch<any>, 
   {
     const ETHEREUM_CLIENT = new ethers.providers.JsonRpcProvider(`https://mainnet.infura.io/v3/${INFURA.id}`)
     const addressBalance = await ETHEREUM_CLIENT.getBalance(address)
-    const ethereumResponse ={
-      address: `ETH address # ${address}, has a balance of:`,
+    const ethereumResponse = {
+      addressTitle: 'ETH address #',
+      address: `${address}`,
+      balanceTitle: 'Has a balance of :',
       balance: `${ethers.utils.formatEther(addressBalance)} ETH`
     } 
     setAddressData(ethereumResponse)
@@ -33,8 +35,10 @@ export const _getSolanaAddressBalance = async (setAddressData: Dispatch<any>, ad
   {
     const SOLANA_CLIENT = new Connection(clusterApiUrl('devnet'),'confirmed')
     const addressBalance = await SOLANA_CLIENT.getBalance( new PublicKey(address) )
-    const solanaResponse ={
-      address: `Solana address # ${address}, has a balance of:`,
+    const solanaResponse = {
+      addressTitle: 'Solana address #',
+      address: `${address}`,
+      balanceTitle: 'Has a balance of :',
       balance: `${addressBalance} SOL`
     } 
     setAddressData(solanaResponse)
@@ -54,8 +58,10 @@ export const _getTerraAddressBalance = async (setAddressData: Dispatch<any>, add
   {
     const TERRA_CLIENT = new LCDClient({URL: 'https://bombay-lcd.terra.dev', chainID: 'bombay-12'})
     const [addressBalance] = await TERRA_CLIENT.bank.balance(address)
-    const terraResponse ={
-      address: `Terra address # ${address}, has a balance of:`,
+    const terraResponse = {
+      addressTitle: 'Terra address #',
+      address: `${address}`,
+      balanceTitle: 'Has a balance of :',
       balance: `${JSON.stringify(addressBalance.toData())}`
     } 
     //Method that terra documentation uses:  addressBalance.toData()

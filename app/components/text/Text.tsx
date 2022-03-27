@@ -1,21 +1,26 @@
 import { TextProps } from "../../constants/types/components_props/types"
 
-export const Text = ( {alignment, blockchainResponse}: TextProps ) =>
+export const Text = ( {blockchainResponse}: TextProps ) =>
 {
 
     return (
       
-        <div className="text__container">
+        <div className={blockchainResponse ? "text__container" : ''}>
 
-            <p>
+            <p className="text-title">
+                {blockchainResponse ? blockchainResponse.addressTitle : ''}
+            </p>
+
+            <p className="text-address">
                 {blockchainResponse ? blockchainResponse.address : ''}
             </p>
 
-            <p style={ { textAlign: alignment } }>
+            <p className="text-balance--title">
+                {blockchainResponse ? blockchainResponse.balanceTitle : ''}
+            </p>
 
-                
+            <p className="text-balance--value">
                 {blockchainResponse ? blockchainResponse.balance : ''}
-
             </p>
         </div>
     )
