@@ -6,6 +6,7 @@ import { LCDClient } from '@terra-money/terra.js';
 import serviceObject from "./utils/service-object";
 import { algorandService } from "./service_objects/algorand";
  
+const ADDRESS_ERROR_MESSAGE = 'Error: Please verify that the specified address is valid in the selected blockchain'
 
 //ETHEREUM ADDRESS
 export const _getEthereumAddressBalance = async (setAddressData: Dispatch<any>, address: string): Promise<any> =>
@@ -27,6 +28,7 @@ export const _getEthereumAddressBalance = async (setAddressData: Dispatch<any>, 
   catch (error)
   {
     console.error(error)
+    setAddressData({ error: ADDRESS_ERROR_MESSAGE })
   }
 }
 
@@ -49,7 +51,11 @@ export const _getSolanaAddressBalance = async (setAddressData: Dispatch<any>, ad
   }
   catch (error)
   {
+    const solanaResponse = {
+      error: ADDRESS_ERROR_MESSAGE
+    } 
     console.error(error)
+    setAddressData(solanaResponse)
   }
 }
 
@@ -74,6 +80,7 @@ export const _getTerraAddressBalance = async (setAddressData: Dispatch<any>, add
   catch (error)
   {
     console.error(error)
+    setAddressData({ error: ADDRESS_ERROR_MESSAGE })
   }
 }
 
@@ -97,5 +104,6 @@ export const _getAlgorandAddressBalance = async (setAddressData: Dispatch<any>, 
   catch (error)
   {
     console.error(error)
+    setAddressData({ error: ADDRESS_ERROR_MESSAGE })
   }
 }

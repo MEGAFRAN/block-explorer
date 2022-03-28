@@ -3,6 +3,7 @@
   'abstracts/colors',
   'base/typography',
   'base/base';
+  
 
 body {
 
@@ -40,6 +41,7 @@ main {
   align-items: center;
   font-size: $main-size;
   padding: $padding-main-size;
+  padding-top: clamp(10px, 15vw, 60px);
 
   .tag-filter__container {
 
@@ -146,6 +148,10 @@ main {
         background-color: rgba(255, 255, 255, 0.829);
       }
 
+      &.error {
+        border: solid 3px $primary-red;
+      }
+
     }
     
   }
@@ -173,7 +179,6 @@ main {
   .text__container {
     display: flex;
     flex-direction: column;
-    row-gap: 30px;
     word-break: break-word;
     background-color: #3E00FF;
     padding: 10px 16px;
@@ -185,6 +190,15 @@ main {
       font-weight: 600;
       font-size: 1.4rem;
     }
+
+    .text-address {
+      margin-bottom: 30px;
+    }
+
+    &.error {
+      background-color: $primary-red;
+    }
+
   }
     
 }

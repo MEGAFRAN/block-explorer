@@ -30,7 +30,7 @@ const Home: NextPage = () => {
       <main>
 
         <TagFilter tagsData={BLOCKCHAIN_LIST} setSelectedBlockchain={setSelectedBlockchain} dropdownTitle={selectedBlockchain}/>
-        <Input setInputAddress={setInputAddress} placeholder={selectedBlockchain}/>
+        <Input setInputAddress={setInputAddress} placeholder={selectedBlockchain} blockchainResponse={addressData}/>
         <Button handleClick={()=> getAddressBalance(selectedBlockchain) }/>
         <Text blockchainResponse={addressData} />
         
