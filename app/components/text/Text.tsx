@@ -5,7 +5,7 @@ export const Text = ( {blockchainResponse}: TextProps ) =>
 
     return (
       
-        <div className={` ${blockchainResponse ? "text__container" : null} ${blockchainResponse?.error ? "error" : null} `}>
+        <div className={`${blockchainResponse ? "text__container" : ''} ${blockchainResponse?.error ? "error" : ''}`}>
 
             <p className='text-error'>
                 {blockchainResponse ? blockchainResponse.error : null}
