@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  //basePath: '',
-  //assetPrefix: ''
+  basePath: '/block-explorer',
+  assetPrefix: '/block-explorer'
 }
 
 module.exports = nextConfig
