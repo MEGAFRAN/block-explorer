@@ -12,8 +12,8 @@ export interface ApiCoreConstructorInterface extends DataProviderInterface
 
 export interface DataProviderInterface 
 {
-    apiUrl: string,
-    endpoint: string,
+    apiUrl: string | undefined,
+    endpoint: string | undefined,
     id?: AxiosRequestConfig<any>,
     model?: object
 }

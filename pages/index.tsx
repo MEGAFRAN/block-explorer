@@ -5,7 +5,7 @@ import { Button } from '../app/components/button/Button'
 import { Input } from '../app/components/input/Input'
 import { TagFilter } from '../app/components/tag_filter/TagFilter'
 import { Text } from '../app/components/text/Text'
-import { HOME_HEADER } from '../app/constants/seo/homeHeader'
+import { HOME_HEAD } from '../app/constants/seo/homeHead'
 import { _getAlgorandAddressBalance, _getEthereumAddressBalance, _getSolanaAddressBalance, _getTerraAddressBalance } from '../app/services/blockchain.service'
 
 
@@ -26,7 +26,7 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <Head>{HOME_HEADER}</Head>
+      <Head>{HOME_HEAD}</Head>
 
       <a href="./" ><h1 className='blockvista-name'>BlockVista</h1></a>
 

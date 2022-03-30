@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios'; 
 import { handleError, handleResponse } from './response';
  
-const getAll = async (apiUrl:string, endpoint:string) => 
+const getAll = async (apiUrl:string | undefined, endpoint:string | undefined) => 
 { 
   return await axios
                 .get(`${apiUrl}/${endpoint}`)
@@ -9,7 +9,7 @@ const getAll = async (apiUrl:string, endpoint:string) =>
                 .catch(handleError)
 }
 
-const getSingle = async (apiUrl:string, endpoint:string, id:AxiosRequestConfig<any>) => 
+const getSingle = async (apiUrl:string | undefined, endpoint:string | undefined, id:AxiosRequestConfig<any>) => 
 { 
   return await axios
                 .get(`${apiUrl}/${endpoint}/${id}`)
@@ -17,7 +17,7 @@ const getSingle = async (apiUrl:string, endpoint:string, id:AxiosRequestConfig<a
                 .catch(handleError)
 }
 
-const post = async (apiUrl:string, endpoint:string, model:object) => 
+const post = async (apiUrl:string | undefined, endpoint:string | undefined, model:object) => 
 { 
   const headers = {'Content-Type': 'application/json'}
 
@@ -27,7 +27,7 @@ const post = async (apiUrl:string, endpoint:string, model:object) =>
                 .catch(handleError)
 }
 
-const put = async (apiUrl:string, endpoint:string, id: string, model:object) => 
+const put = async (apiUrl:string | undefined, endpoint:string | undefined, id: string, model:object) => 
 { 
   const headers = {'Content-Type': 'application/json'}
 
@@ -37,7 +37,7 @@ const put = async (apiUrl:string, endpoint:string, id: string, model:object) =>
                 .catch(handleError)
 }
 
-const patch = async (apiUrl:string, endpoint:string, model:object) => 
+const patch = async (apiUrl:string | undefined, endpoint:string | undefined, model:object) => 
 { 
   return await axios
                 .patch(`${apiUrl}/${endpoint}`, model)
@@ -45,7 +45,7 @@ const patch = async (apiUrl:string, endpoint:string, model:object) =>
                 .catch(handleError)
 }
 
-const remove = async (apiUrl:string, endpoint:string, id:any) => 
+const remove = async (apiUrl:string | undefined, endpoint:string | undefined, id:any) => 
 { 
   return await axios
               .delete(`${apiUrl}/${endpoint}/${id}`)

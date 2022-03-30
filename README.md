@@ -2,6 +2,10 @@
 
 This project is building a web app, that can get interact with multiple blockchains, in order to get addresses data
 
+Currently supports: Ethereum, Terra, Solana and Algorand
+
+For ethereum you will need a personal "Infura ID" to run in on local
+
 ## Tech stack used
 
 Base skeleton of flex project https://github.com/MEGAFRAN/flex
