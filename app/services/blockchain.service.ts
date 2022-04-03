@@ -13,7 +13,7 @@ export const _getEthereumAddressBalance = async (setAddressData: Dispatch<any>, 
 {
   try
   {
-    const ETHEREUM_CLIENT = new ethers.providers.JsonRpcProvider(`${INFURA.url}${INFURA.id}`)
+    const ETHEREUM_CLIENT = new ethers.providers.JsonRpcProvider(INFURA.url + INFURA.id)
     const addressBalance = await ETHEREUM_CLIENT.getBalance(address)
     const ethereumResponse = {
       addressTitle: 'ETH address #',
