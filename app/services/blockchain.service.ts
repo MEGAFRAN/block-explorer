@@ -1,6 +1,6 @@
 import { Dispatch } from "react";
 import { ethers } from "ethers";
-import { INFURA } from "./api/variables";
+import { INFURA, TERRA } from "./api/variables";
 import { PublicKey, Connection, clusterApiUrl } from "@solana/web3.js";
 import { LCDClient } from '@terra-money/terra.js';
 import serviceObject from "./utils/service-object";
@@ -13,7 +13,7 @@ export const _getEthereumAddressBalance = async (setAddressData: Dispatch<any>, 
 {
   try
   {
-    const ETHEREUM_CLIENT = new ethers.providers.JsonRpcProvider(`https://mainnet.infura.io/v3/${INFURA.id}`)
+    const ETHEREUM_CLIENT = new ethers.providers.JsonRpcProvider(`${INFURA.url}${INFURA.id}`)
     const addressBalance = await ETHEREUM_CLIENT.getBalance(address)
     const ethereumResponse = {
       addressTitle: 'ETH address #',
@@ -64,7 +64,7 @@ export const _getTerraAddressBalance = async (setAddressData: Dispatch<any>, add
 {
   try
   {
-    const TERRA_CLIENT = new LCDClient({URL: 'https://bombay-lcd.terra.dev', chainID: 'bombay-12'})
+    const TERRA_CLIENT = new LCDClient({URL: TERRA.url, chainID: TERRA.chainId})
     const [addressBalance] = await TERRA_CLIENT.bank.balance(address)
     const terraResponse = {
       addressTitle: 'Terra address #',

@@ -4,7 +4,9 @@ This project is building a web app, that can get interact with multiple blockcha
 
 Currently supports: Ethereum, Terra, Solana and Algorand
 
-For ethereum you will need a personal "Infura ID" to run in on local
+For ethereum try to use your personal "Infura ID"
+
+In test-addresses.txt file you will find random addresses for testing
 
 ## Tech stack used
 
@@ -26,3 +28,5 @@ yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+Live project: https://megafran.github.io/block-explorer/

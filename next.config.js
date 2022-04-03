@@ -19,9 +19,11 @@ const nextConfig = {
   },
 
   env: {
-    INFURA_ID: process.env.NEXT_PUBLIC_INFURA_ID,
-    ALGORAND_API: process.env.NEXT_PUBLIC_ALGORAND_API,
-    ALGORAND_ENDPOINT: process.env.NEXT_PUBLIC_ALGORAND_API_ENDPOINT
+    INFURA_ID: process.env.INFURA_ID,
+    TERRA_URL: process.envTERRA_URL,
+    TERRA_CHAIN_ID: process.env.TERRA_CHAIN_ID,
+    ALGORAND_API: process.env.ALGORAND_API,
+    ALGORAND_ENDPOINT: process.env.ALGORAND_API_ENDPOINT
   }}
 
 module.exports = (phase, { defaultConfig }) => {
