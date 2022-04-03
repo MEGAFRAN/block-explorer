@@ -1,21 +1,17 @@
-
-
-export const Navbar = ({ children }: any) =>
+export const Navbar = ({ setMode }: any) =>
 {
 
     return (
-        
-        <div>
 
-            <nav className="navbar__container">
-
-                {children}
-                HOLA
-
-            </nav>
-
-        </div>
-
+        <>
+            <div className='navBar'>
+                <a href="./" ><h1 className='blockvista-name'>BlockVista</h1></a>
+            </div> 
+            <div className='options'>
+                <span onClick={setMode('BlockExplorer')}>BlockExplorer</span>
+                <span onClick={setMode('WalletExplorer')}>WalletExplorer</span>
+            </div>
+        </>
             
     )
 

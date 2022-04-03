@@ -1,7 +1,7 @@
 
 
 
-export const Button = ({ text='Search Address', handleClick, style='', alignment='', size='' }: any) => {
+export const Button = ({ text='', handleClick, style='', alignment='', size='' }: any) => {
 
   return (
 
