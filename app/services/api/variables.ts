@@ -6,8 +6,8 @@ export const API_TEST =
 
 export const INFURA =
 {
-    url: process.env.INFURA_API || process.env.NEXT_PUBLIC_INFURA_API,
-    id: process.env.INFURA_ID || process.env.NEXT_PUBLIC_INFURA_ID
+    url: process.env.INFURA_API || process.env.NEXT_PUBLIC_INFURA_API !,
+    id: process.env.INFURA_ID || process.env.NEXT_PUBLIC_INFURA_ID !
 }
 
 export const TERRA =

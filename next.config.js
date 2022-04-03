@@ -20,7 +20,7 @@ const nextConfig = {
 
   env: {
     INFURA_ID: process.env.INFURA_ID,
-    TERRA_URL: process.envTERRA_URL,
+    TERRA_URL: process.env.TERRA_URL,
     TERRA_CHAIN_ID: process.env.TERRA_CHAIN_ID,
     ALGORAND_API: process.env.ALGORAND_API,
     ALGORAND_ENDPOINT: process.env.ALGORAND_API_ENDPOINT
