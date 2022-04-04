@@ -13,11 +13,12 @@ import { accessMetamaskWallet, accessPhantomWallet } from '../app/services/walle
 
 const Home: NextPage = () => {
 
-  const BLOCKCHAIN_LIST: string[] = ['ethereum', 'solana', 'terra', 'algorand']
+  const BLOCKCHAIN_ADRESSES: string[] = ['ethereum', 'solana', 'terra', 'algorand']
+  const BLOCKCHAIN_WALLETS: string[] = ['ethereum', 'solana']
   const [selectedBlockchain, setSelectedBlockchain] = useState<string>('')
   const [inputAddress, setInputAddress] = useState<string>('')
   const [addressData, setAddressData] = useState<any>('')
-  const [mode, setMode] =  useState<string>('BlockExplorer')
+  const [mode, setMode] =  useState<string>('block-explorer')
 
   const getAddressBalance = (selectedBlockchain: string): void =>
   {
@@ -38,22 +39,22 @@ const Home: NextPage = () => {
     <>
       <Head>{HOME_HEAD}</Head>
 
-      <Navbar setMode={()=> setMode}/>
+      <Navbar setMode={setMode}/>
 
-      <main>
+      <main className={mode}>
 
-        <section className={`block-explorer ${mode === 'BlockExplorer' ? '' : 'hidden'}`}>
+        <section className='block-explorer'>
 
-          <TagFilter tagsData={BLOCKCHAIN_LIST} setSelectedBlockchain={setSelectedBlockchain} dropdownTitle={selectedBlockchain}/>
+          <TagFilter tagsData={BLOCKCHAIN_ADRESSES} setSelectedBlockchain={setSelectedBlockchain} dropdownTitle={selectedBlockchain}/>
           <Input setInputAddress={setInputAddress} placeholder={selectedBlockchain} blockchainResponse={addressData}/>
           <Button text='Search Address' handleClick={()=> getAddressBalance(selectedBlockchain) }/>
           <Text blockchainResponse={addressData} />
 
         </section>
         
-        <section className={`wallet-explorer ${mode === 'WalletExplorer' ? '' : 'hidden'}`} >
+        <section className='wallet-explorer'>
             
-          <TagFilter tagsData={BLOCKCHAIN_LIST} setSelectedBlockchain={setSelectedBlockchain} dropdownTitle={selectedBlockchain} />
+          <TagFilter tagsData={BLOCKCHAIN_WALLETS} setSelectedBlockchain={setSelectedBlockchain} dropdownTitle={selectedBlockchain} />
           <Button text='Access Wallet' handleClick={() => accessWallet(selectedBlockchain)} />
             
         </section>

@@ -39,14 +39,20 @@ body {
 
 .options {
 
-  padding: 0 $padding-main-size;
   display: flex;
   justify-content: space-evenly;
-  padding-top: 18px;
+  padding-top: 60px;
+
+  input[type="radio"] {
+    display: none;
+  }
     
-  span {
+  label {
     color: $primary-white;
-    text-decoration: underline;
+    text-transform: capitalize;
+    border: solid 2px;
+    border-radius: 45px;
+    padding: 12px;
 
     &:hover {
       cursor: pointer;
@@ -233,11 +239,11 @@ main {
 
   } 
   
-  .block-explorer.hidden {
+  &.block-explorer > .wallet-explorer {
     display: none;
   }
 
-  .wallet-explorer.hidden {
+  &.wallet-explorer > .block-explorer {
     display: none;
   }
     
