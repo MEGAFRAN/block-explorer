@@ -9,7 +9,7 @@ import { TagFilter } from '../app/components/tag_filter/TagFilter'
 import { Text } from '../app/components/text/Text'
 import { HOME_HEAD } from '../app/constants/seo/homeHead'
 import { validateBalance} from '../app/services/balance.service'
-import { validateNft, _getNfts } from '../app/services/nft.service'
+import { validateNft } from '../app/services/nft.service'
 import { validateWallet } from '../app/services/wallet.service'
 
 
@@ -35,7 +35,9 @@ const Home: NextPage = () => {
   
 
   return (
+
     <>
+      
       <Head>{HOME_HEAD}</Head>
 
       <Navbar setMode={setMode}/>
@@ -44,7 +46,7 @@ const Home: NextPage = () => {
 
         <section className='block-explorer'>
 
-          <TagFilter tagsData={BLOCKCHAIN_ADRESSES} setSelectedBlockchain={setSelectedBlockchain} dropdownTitle={selectedBlockchain}/>
+          <TagFilter tagsData={BLOCKCHAIN_ADRESSES} setSelectedBlockchain={setSelectedBlockchain} dropdownTitle={selectedBlockchain} mode='block'/>
           <Input setInputAddress={setInputAddress} placeholder={selectedBlockchain} blockchainResponse={addressData}/>
           <Button text='Search Address' handleClick={()=> accessAddressBalance(selectedBlockchain) }/>
           <Text blockchainResponse={addressData} />
@@ -53,14 +55,14 @@ const Home: NextPage = () => {
         
         <section className='wallet-explorer'>
             
-          <TagFilter tagsData={BLOCKCHAIN_WALLETS} setSelectedBlockchain={setSelectedBlockchain} dropdownTitle={selectedBlockchain} />
+          <TagFilter tagsData={BLOCKCHAIN_WALLETS} setSelectedBlockchain={setSelectedBlockchain} dropdownTitle={selectedBlockchain} mode='wallet'/>
           <Button text='Access Wallet' handleClick={() => accessWallet(selectedBlockchain)} />
             
         </section>
 
         <section className='nft-explorer'>
             
-            <TagFilter tagsData={NFT_WALLETS} setSelectedBlockchain={setSelectedBlockchain} dropdownTitle={selectedBlockchain} />
+            <TagFilter tagsData={NFT_WALLETS} setSelectedBlockchain={setSelectedBlockchain} dropdownTitle={selectedBlockchain} mode='nft'/>
             <Input setInputAddress={setNftAddress} placeholder={selectedBlockchain} blockchainResponse={addressData}/>
             <Button text='View nfts' handleClick={() => accessNfts(nftAddress, selectedBlockchain)} />
             <Text blockchainResponse={addressData} />
@@ -70,9 +72,10 @@ const Home: NextPage = () => {
         
       </main>
 
-
     </>
+
   )
+
 }
 
 export default Home
