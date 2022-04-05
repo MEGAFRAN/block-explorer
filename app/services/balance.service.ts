@@ -7,8 +7,6 @@ import serviceObject from "./utils/service-object";
 import { algorandService } from "./service_objects/algorand";
 import { addressValidator } from "../utils/address-validator";
  
-const ADDRESS_ERROR_MESSAGE = 'Error: Please verify that the specified address is valid in the selected blockchain'
-
 //ETHEREUM ADDRESS
 export const _getEthereumAddressBalance = async (setAddressData: Dispatch<any>, address: string): Promise<any> =>
 {
@@ -22,8 +20,8 @@ export const _getEthereumAddressBalance = async (setAddressData: Dispatch<any>, 
       balanceTitle: 'Has a balance of :',
       balance: `${ethers.utils.formatEther(addressBalance)} ETH`
     } 
-    addressValidator(true, true, setAddressData, ethereumResponse)
-    
+    setAddressData(ethereumResponse)
+ 
     return ethereumResponse
   }
   catch (error)
@@ -52,11 +50,8 @@ export const _getSolanaAddressBalance = async (setAddressData: Dispatch<any>, ad
   }
   catch (error)
   {
-    const solanaResponse = {
-      error: ADDRESS_ERROR_MESSAGE
-    } 
     console.error(error)
-    setAddressData(solanaResponse)
+    addressValidator(false, false, setAddressData)
   }
 }
 
@@ -81,7 +76,7 @@ export const _getTerraAddressBalance = async (setAddressData: Dispatch<any>, add
   catch (error)
   {
     console.error(error)
-    setAddressData({ error: ADDRESS_ERROR_MESSAGE })
+    addressValidator(false, false, setAddressData)
   }
 }
 
@@ -97,7 +92,6 @@ export const _getAlgorandAddressBalance = async (setAddressData: Dispatch<any>, 
       balanceTitle: 'Has a balance of :',
       balance: `${responseData.account.amount} ALGO`
     } 
-
     setAddressData(algorandResponse)
     
     return algorandResponse
@@ -105,6 +99,15 @@ export const _getAlgorandAddressBalance = async (setAddressData: Dispatch<any>, 
   catch (error)
   {
     console.error(error)
-    setAddressData({ error: ADDRESS_ERROR_MESSAGE })
+    addressValidator(false, false, setAddressData)
   }
+}
+
+
+export const validateBalance = (selectedBlockchain: string, setAddressData: any, inputAddress: any): void =>
+{
+  selectedBlockchain === "ethereum" ? _getEthereumAddressBalance(setAddressData, inputAddress) :
+  selectedBlockchain === "solana" ? _getSolanaAddressBalance(setAddressData, inputAddress) : 
+  selectedBlockchain === "terra" ? _getTerraAddressBalance(setAddressData, inputAddress) :
+  selectedBlockchain === "algorand" ? _getAlgorandAddressBalance(setAddressData, inputAddress) : null
 }

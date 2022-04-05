@@ -8,9 +8,9 @@ import { Navbar } from '../app/components/structure/header/Navbar'
 import { TagFilter } from '../app/components/tag_filter/TagFilter'
 import { Text } from '../app/components/text/Text'
 import { HOME_HEAD } from '../app/constants/seo/homeHead'
-import { _getAlgorandAddressBalance, _getEthereumAddressBalance, _getSolanaAddressBalance, _getTerraAddressBalance } from '../app/services/balance.service'
+import { validateBalance} from '../app/services/balance.service'
 import { validateNft, _getNfts } from '../app/services/nft.service'
-import { accessMetamaskWallet, accessPhantomWallet } from '../app/services/wallet.service'
+import { validateWallet } from '../app/services/wallet.service'
 
 
 const Home: NextPage = () => {
@@ -25,24 +25,13 @@ const Home: NextPage = () => {
   const [mode, setMode] =  useState<string>('block-explorer')
   const [nfts, setNfts] = useState<[Object]>([{}])
 
-  const getAddressBalance = (selectedBlockchain: string): void =>
-  {
-    selectedBlockchain === "ethereum" ? _getEthereumAddressBalance(setAddressData, inputAddress) :
-    selectedBlockchain === "solana" ? _getSolanaAddressBalance(setAddressData, inputAddress) : 
-    selectedBlockchain === "terra" ? _getTerraAddressBalance(setAddressData, inputAddress) :
-    selectedBlockchain === "algorand" ? _getAlgorandAddressBalance(setAddressData, inputAddress) : null
-  }
 
-  const accessWallet = (selectedBlockchain: string): void =>
-  {
-    selectedBlockchain === "ethereum" ? accessMetamaskWallet() :
-    selectedBlockchain === "solana" ? accessPhantomWallet() : null
-  }
+  const accessAddressBalance = (selectedBlockchain: string): void => validateBalance(selectedBlockchain, setAddressData, inputAddress)
+  
+  const accessWallet = (selectedBlockchain: string): void => validateWallet(selectedBlockchain)
+  
+  const accessNfts = async (address: string, blockchain: string): Promise<any> => validateNft(address, blockchain, setNfts, setAddressData)
 
-  const accessNfts = async (address: string, blockchain: string): Promise<any> => 
-  {
-    validateNft(address, blockchain, setNfts, setAddressData)
-  }
   
 
   return (
@@ -57,7 +46,7 @@ const Home: NextPage = () => {
 
           <TagFilter tagsData={BLOCKCHAIN_ADRESSES} setSelectedBlockchain={setSelectedBlockchain} dropdownTitle={selectedBlockchain}/>
           <Input setInputAddress={setInputAddress} placeholder={selectedBlockchain} blockchainResponse={addressData}/>
-          <Button text='Search Address' handleClick={()=> getAddressBalance(selectedBlockchain) }/>
+          <Button text='Search Address' handleClick={()=> accessAddressBalance(selectedBlockchain) }/>
           <Text blockchainResponse={addressData} />
 
         </section>

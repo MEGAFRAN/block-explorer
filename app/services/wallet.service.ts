@@ -29,3 +29,9 @@ export const accessPhantomWallet = ():void =>
 
     return alert("please install phantom wallet")
 }
+
+export const validateWallet = (selectedBlockchain: string): void =>
+{
+    selectedBlockchain === "ethereum" ? accessMetamaskWallet() :
+    selectedBlockchain === "solana" ? accessPhantomWallet() : null
+}
