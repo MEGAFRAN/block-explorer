@@ -1,7 +1,7 @@
 export const Navbar = ({ setMode }: any) =>
 {
 
-    const options = ['block-explorer', 'wallet-explorer']
+    const options = ['block-explorer', 'wallet-explorer', 'nft-explorer']
 
     let optionsList = options.map((option: string) => (
 

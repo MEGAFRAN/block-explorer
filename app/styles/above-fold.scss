@@ -42,6 +42,8 @@ body {
   display: flex;
   justify-content: space-evenly;
   padding-top: 60px;
+  flex-wrap: wrap;
+  row-gap: 40px;
 
   input[type="radio"] {
     display: none;
@@ -67,9 +69,9 @@ body {
 
 main {
 
-  .block-explorer, .wallet-explorer {
+  .block-explorer, .wallet-explorer, .nft-explorer {
 
-    display: flex;
+    display: none;
     flex-flow: column wrap;
     row-gap: $gap-row-main;
     align-items: center;
@@ -237,14 +239,24 @@ main {
 
     }
 
+    .gallery__container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
   } 
   
-  &.block-explorer > .wallet-explorer {
-    display: none;
+  &.block-explorer > .block-explorer {
+    display: flex;
   }
 
-  &.wallet-explorer > .block-explorer {
-    display: none;
+  &.wallet-explorer > .wallet-explorer {
+    display: flex;
+  }
+
+  &.nft-explorer > .nft-explorer {
+    display: flex;
   }
     
 }
