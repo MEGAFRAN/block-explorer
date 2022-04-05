@@ -2,14 +2,14 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useState } from 'react'
 import { Button } from '../app/components/button/Button'
-import { Gallery } from '../app/components/gallery/gallery'
+import { Gallery } from '../app/components/gallery/Gallery'
 import { Input } from '../app/components/input/Input'
 import { Navbar } from '../app/components/structure/header/Navbar'
 import { TagFilter } from '../app/components/tag_filter/TagFilter'
 import { Text } from '../app/components/text/Text'
 import { HOME_HEAD } from '../app/constants/seo/homeHead'
-import { _getAlgorandAddressBalance, _getEthereumAddressBalance, _getSolanaAddressBalance, _getTerraAddressBalance } from '../app/services/blockchain.service'
-import { _getNfts } from '../app/services/nft.service'
+import { _getAlgorandAddressBalance, _getEthereumAddressBalance, _getSolanaAddressBalance, _getTerraAddressBalance } from '../app/services/balance.service'
+import { validateNft, _getNfts } from '../app/services/nft.service'
 import { accessMetamaskWallet, accessPhantomWallet } from '../app/services/wallet.service'
 
 
@@ -39,12 +39,9 @@ const Home: NextPage = () => {
     selectedBlockchain === "solana" ? accessPhantomWallet() : null
   }
 
-  const accessNfts = async (address: string): Promise<any> => 
+  const accessNfts = async (address: string, blockchain: string): Promise<any> => 
   {
-    let data:[any] = await _getNfts(address)
-    setNfts(data)
-
-    return data
+    validateNft(address, blockchain, setNfts, setAddressData)
   }
   
 
@@ -75,12 +72,11 @@ const Home: NextPage = () => {
         <section className='nft-explorer'>
             
             <TagFilter tagsData={NFT_WALLETS} setSelectedBlockchain={setSelectedBlockchain} dropdownTitle={selectedBlockchain} />
-            <Input setInputAddress={setNftAddress} placeholder={selectedBlockchain}/>
-            <Button text='View nfts' handleClick={() => accessNfts(nftAddress)} />
+            <Input setInputAddress={setNftAddress} placeholder={selectedBlockchain} blockchainResponse={addressData}/>
+            <Button text='View nfts' handleClick={() => accessNfts(nftAddress, selectedBlockchain)} />
+            <Text blockchainResponse={addressData} />
             <Gallery galleryData={nfts}/>
 
-            
-              
         </section>
         
       </main>

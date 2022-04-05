@@ -5,6 +5,7 @@ import { PublicKey, Connection, clusterApiUrl } from "@solana/web3.js";
 import { LCDClient } from '@terra-money/terra.js';
 import serviceObject from "./utils/service-object";
 import { algorandService } from "./service_objects/algorand";
+import { addressValidator } from "../utils/address-validator";
  
 const ADDRESS_ERROR_MESSAGE = 'Error: Please verify that the specified address is valid in the selected blockchain'
 
@@ -21,14 +22,14 @@ export const _getEthereumAddressBalance = async (setAddressData: Dispatch<any>, 
       balanceTitle: 'Has a balance of :',
       balance: `${ethers.utils.formatEther(addressBalance)} ETH`
     } 
-    setAddressData(ethereumResponse)
+    addressValidator(true, true, setAddressData, ethereumResponse)
     
     return ethereumResponse
   }
   catch (error)
   {
     console.error(error)
-    setAddressData({ error: ADDRESS_ERROR_MESSAGE })
+    addressValidator(false, false, setAddressData)
   }
 }
 

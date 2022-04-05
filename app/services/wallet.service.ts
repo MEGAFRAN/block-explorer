@@ -6,28 +6,26 @@ declare const window: Window & typeof globalThis &
 
 export const accessMetamaskWallet = ():void =>
 {
-    if (window.ethereum ==! undefined)
+    if (window.ethereum !== undefined)
     {
         window.ethereum.request({ method: 'eth_requestAccounts' })
-    }
-    else
-    {
-        alert("please install metamask wallet")
+
+        return
     }
 
+    return alert("please install metamask wallet")
 }
 
 
 export const accessPhantomWallet = ():void =>
 {
-    if (window.solana ==! undefined)
+    if (window.solana.connect)
     {
         window.solana.connect
-        window.solana.request({method:'connect'})
-    }
-    else
-    {
-        alert("please install phantom wallet")
+        window.solana.request({ method: 'connect' })
+        
+        return
     }
 
+    return alert("please install phantom wallet")
 }

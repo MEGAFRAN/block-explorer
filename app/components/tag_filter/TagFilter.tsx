@@ -5,8 +5,8 @@ export const TagFilter = ({tagsData, title='Default tag title', setSelectedBlock
 
         <div tabIndex={0} key={tag} className="tag-filter__dropdown-option">
 
-            <input id={tag} className="tag" type="radio" name="blockchains" 
-            onChange={event => setSelectedBlockchain(event.target.id)} /> 
+            <input value={tag} className="tag" type="radio" name="blockchains" 
+            onChange={event => setSelectedBlockchain(event.target.value)} /> 
             
             <label htmlFor={tag}>{tag}</label>
             
