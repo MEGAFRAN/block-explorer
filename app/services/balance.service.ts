@@ -62,11 +62,14 @@ export const _getTerraAddressBalance = async (setAddressData: Dispatch<any>, add
   {
     const TERRA_CLIENT = new LCDClient({URL: TERRA.url, chainID: TERRA.chainId})
     const [addressBalance] = await TERRA_CLIENT.bank.balance(address)
+    const addressBalanceToString = addressBalance. map(item => {
+      return `${item.denom}:${item.amount}/ `
+    })
     const terraResponse = {
       addressTitle: 'Terra address #',
       address: `${address}`,
       balanceTitle: 'Has a balance of :',
-      balance: `${JSON.stringify(addressBalance.toData())}`
+      balance: addressBalanceToString
     } 
     //Method that terra documentation uses:  addressBalance.toData()
     setAddressData(terraResponse)
