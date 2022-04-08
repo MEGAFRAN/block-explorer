@@ -9,6 +9,7 @@ import { TagFilter } from '../app/components/tag_filter/TagFilter'
 import { Text } from '../app/components/text/Text'
 import { HOME_HEAD } from '../app/constants/seo/homeHead'
 import { validateBalance} from '../app/services/balance.service'
+import { validateContractData } from '../app/services/contract.service'
 import { validateNft } from '../app/services/nft.service'
 import { validateWallet } from '../app/services/wallet.service'
 
@@ -18,6 +19,7 @@ const Home: NextPage = () => {
   const BLOCKCHAIN_ADRESSES: string[] = ['ethereum', 'solana', 'terra', 'algorand']
   const BLOCKCHAIN_WALLETS: string[] = ['ethereum', 'solana']
   const NFT_WALLETS: string[] = ['ethereum']
+  const SMART_CONTRACTS: string[] = ['ethereum']
   const [selectedBlockchain, setSelectedBlockchain] = useState<string>('')
   const [inputAddress, setInputAddress] = useState<string>('')
   const [addressData, setAddressData] = useState<any>('')
@@ -31,6 +33,8 @@ const Home: NextPage = () => {
   const accessWallet = (selectedBlockchain: string): void => validateWallet(selectedBlockchain)
   
   const accessNfts = async (address: string, blockchain: string): Promise<any> => validateNft(address, blockchain, setNfts, setAddressData)
+
+  const accessContractData = async (address: string): Promise<any> => validateContractData(address)
 
   
 
@@ -62,11 +66,19 @@ const Home: NextPage = () => {
 
         <section className='nft-explorer'>
             
-            <TagFilter tagsData={NFT_WALLETS} setSelectedBlockchain={setSelectedBlockchain} dropdownTitle={selectedBlockchain} mode='nft'/>
-            <Input setInputAddress={setNftAddress} placeholder={selectedBlockchain} blockchainResponse={addressData}/>
-            <Button text='View nfts' handleClick={() => accessNfts(nftAddress, selectedBlockchain)} />
-            <Text blockchainResponse={addressData} />
-            <Gallery galleryData={nfts}/>
+          <TagFilter tagsData={NFT_WALLETS} setSelectedBlockchain={setSelectedBlockchain} dropdownTitle={selectedBlockchain} mode='nft'/>
+          <Input setInputAddress={setNftAddress} placeholder={selectedBlockchain} blockchainResponse={addressData}/>
+          <Button text='View nfts' handleClick={() => accessNfts(nftAddress, selectedBlockchain)} />
+          <Text blockchainResponse={addressData} />
+          <Gallery galleryData={nfts}/>
+
+        </section>
+
+        <section className='contract-explorer'>
+
+          <TagFilter tagsData={SMART_CONTRACTS} setSelectedBlockchain={setSelectedBlockchain} dropdownTitle={selectedBlockchain} mode='contract'/>
+          <Input setInputAddress={setInputAddress} placeholder={selectedBlockchain} blockchainResponse={addressData}/>
+          <Button text='View smart contract' handleClick={() => accessContractData(inputAddress)} />
 
         </section>
         

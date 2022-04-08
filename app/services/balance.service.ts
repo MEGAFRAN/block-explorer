@@ -8,7 +8,7 @@ import { algorandService } from "./service_objects/algorand";
 import { addressValidator } from "../utils/address-validator";
  
 //ETHEREUM ADDRESS
-export const _getEthereumAddressBalance = async (setAddressData: Dispatch<any>, address: string): Promise<any> =>
+const _getEthereumAddressBalance = async (setAddressData: Dispatch<any>, address: string): Promise<any> =>
 {
   try
   {
@@ -32,7 +32,7 @@ export const _getEthereumAddressBalance = async (setAddressData: Dispatch<any>, 
 }
 
 //SOLANA ADDRESS
-export const _getSolanaAddressBalance = async (setAddressData: Dispatch<any>, address: string): Promise<any> =>
+const _getSolanaAddressBalance = async (setAddressData: Dispatch<any>, address: string): Promise<any> =>
 {
   try
   {
@@ -56,7 +56,7 @@ export const _getSolanaAddressBalance = async (setAddressData: Dispatch<any>, ad
 }
 
 //TERRA ADDRESS
-export const _getTerraAddressBalance = async (setAddressData: Dispatch<any>, address: string): Promise<any> =>
+const _getTerraAddressBalance = async (setAddressData: Dispatch<any>, address: string): Promise<any> =>
 {
   try
   {
@@ -84,7 +84,7 @@ export const _getTerraAddressBalance = async (setAddressData: Dispatch<any>, add
 }
 
 //ALGORAND ADDRESS
-export const _getAlgorandAddressBalance = async (setAddressData: Dispatch<any>, address: string): Promise<any> =>
+const _getAlgorandAddressBalance = async (setAddressData: Dispatch<any>, address: string): Promise<any> =>
 {
   try
   {
@@ -106,11 +106,25 @@ export const _getAlgorandAddressBalance = async (setAddressData: Dispatch<any>, 
   }
 }
 
+const BLOCKCHAINS_INFO: {name:string, getBalanceMethod:any}[] = [
+  { name: "ethereum", getBalanceMethod: _getEthereumAddressBalance },
+  { name: "solana", getBalanceMethod: _getSolanaAddressBalance },
+  { name: "terra", getBalanceMethod: _getTerraAddressBalance },
+  { name: "algorand", getBalanceMethod: _getAlgorandAddressBalance }
+]
+
 
 export const validateBalance = (selectedBlockchain: string, setAddressData: any, inputAddress: any): void =>
 {
-  selectedBlockchain === "ethereum" ? _getEthereumAddressBalance(setAddressData, inputAddress) :
-  selectedBlockchain === "solana" ? _getSolanaAddressBalance(setAddressData, inputAddress) : 
-  selectedBlockchain === "terra" ? _getTerraAddressBalance(setAddressData, inputAddress) :
-  selectedBlockchain === "algorand" ? _getAlgorandAddressBalance(setAddressData, inputAddress) : null
+
+  try
+  {
+    const blockchain = BLOCKCHAINS_INFO.find(token => selectedBlockchain === token.name)
+    blockchain?.getBalanceMethod(setAddressData, inputAddress)
+
+  } catch (error)
+  {
+    console.error(error)
+  }
+
 }

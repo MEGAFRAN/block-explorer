@@ -69,7 +69,7 @@ body {
 
 main {
 
-  .block-explorer, .wallet-explorer, .nft-explorer {
+  .block-explorer, .wallet-explorer, .nft-explorer, .contract-explorer {
 
     display: none;
     flex-flow: column wrap;
@@ -256,6 +256,10 @@ main {
   }
 
   &.nft-explorer > .nft-explorer {
+    display: flex;
+  }
+
+  &.contract-explorer > .contract-explorer {
     display: flex;
   }
     
