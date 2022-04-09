@@ -34,7 +34,7 @@ const Home: NextPage = () => {
   
   const accessNfts = async (address: string, blockchain: string): Promise<any> => validateNft(address, blockchain, setNfts, setAddressData)
 
-  const accessContractData = async (address: string): Promise<any> => validateContractData(address)
+  const accessContractData = async (address: string): Promise<any> => validateContractData(address, setAddressData)
 
   
 
@@ -79,6 +79,7 @@ const Home: NextPage = () => {
           <TagFilter tagsData={SMART_CONTRACTS} setSelectedBlockchain={setSelectedBlockchain} dropdownTitle={selectedBlockchain} mode='contract'/>
           <Input setInputAddress={setInputAddress} placeholder={selectedBlockchain} blockchainResponse={addressData}/>
           <Button text='View smart contract' handleClick={() => accessContractData(inputAddress)} />
+          <Text blockchainResponse={addressData} />
 
         </section>
         

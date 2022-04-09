@@ -223,15 +223,7 @@ main {
       border-radius: 7px;
       box-shadow: 0px 6px 11px #060014;
       text-align: center;
-
-      .text-title, .text-balance--title {
-        font-weight: 600;
-        font-size: 1.4rem;
-      }
-
-      .text-address {
-        margin-bottom: 30px;
-      }
+      row-gap: 16px;
 
       &.error {
         background-color: $primary-red;

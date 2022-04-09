@@ -1,4 +1,7 @@
 import { ethers } from "ethers";
+import { Dispatch } from "react";
+import { CLIENT_RENEG_LIMIT } from "tls";
+import { addressValidator } from "../utils/address-validator";
 import { INFURA } from "./api/variables";
 
 
@@ -6,6 +9,7 @@ import { INFURA } from "./api/variables";
 const CONTRACT_ABI: string[] = [
     'function name() view returns (string)',
     'function symbol() view returns (string)',
+    'function decimals() view returns (uint8)',
     'function totalSupply() view returns (uint256)',
     'function balanceOf(address) view returns (uint)'
 ]
@@ -15,21 +19,29 @@ const CONTRACT_ABI: string[] = [
 const activateProvider = () => new ethers.providers.JsonRpcProvider(INFURA.url + INFURA.id)
 
 export const validateContractData = async ( contractAddress: string,
-                                            contractAbi: string[] = CONTRACT_ABI,
-                                            provider: ethers.providers.JsonRpcProvider = activateProvider() ): Promise<void> =>
+                                            setAddressData: Dispatch<any> ): Promise<any> =>
 {
 
     try
     {
-        const contract = new ethers.Contract(contractAddress, contractAbi, provider)
+        const contract = new ethers.Contract(contractAddress, CONTRACT_ABI, activateProvider())
         const name = await contract.name()
         const symbol = await contract.symbol()
         const totalSupply = ethers.utils.formatEther( await contract.totalSupply() )
-        console.log(name, symbol, totalSupply)
+
+        const contractResponse = { 
+            name: `Smart contract name: ${name}`, 
+            symbol: `Symbol: ${symbol}`, 
+            totalSupply: `Has a total supply of: ${totalSupply} ${symbol}` }
+
+        setAddressData(contractResponse)
+
+        return contractResponse
 
     } catch (error)
     {
         console.error(error)
+        addressValidator(false, false, setAddressData)
     }
 
 } 

@@ -1,6 +1,6 @@
 export type TextProps =
 {
-    blockchainResponse?: {addressTitle: string, address: string, balanceTitle: string, balance: string, error: string},
+    blockchainResponse?: any,
     alignment?: "initial" | "center"| "left" | "right" | "justify" | "inherit"
 }
 
