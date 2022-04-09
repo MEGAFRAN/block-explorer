@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from '../app/components/button/Button'
 import { Gallery } from '../app/components/gallery/Gallery'
 import { Input } from '../app/components/input/Input'
@@ -36,6 +36,14 @@ const Home: NextPage = () => {
 
   const accessContractData = async (address: string): Promise<any> => validateContractData(address, setAddressData)
 
+  useEffect(() => 
+  {
+    
+    setSelectedBlockchain('')
+    setInputAddress('')
+    setAddressData('')
+
+  }, [mode])
   
 
   return (

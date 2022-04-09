@@ -16,7 +16,7 @@ const _getEthereumAddressBalance = async (setAddressData: Dispatch<any>, address
     const addressBalance = await ETHEREUM_CLIENT.getBalance(address)
     const ethereumResponse = {
       addressTitle: 'ETH address #',
-      address: `${address}`,
+      address: address,
       balanceTitle: 'Has a balance of :',
       balance: `${ethers.utils.formatEther(addressBalance)} ETH`
     } 
@@ -40,7 +40,7 @@ const _getSolanaAddressBalance = async (setAddressData: Dispatch<any>, address: 
     const addressBalance = await SOLANA_CLIENT.getBalance( new PublicKey(address) )
     const solanaResponse = {
       addressTitle: 'Solana address #',
-      address: `${address}`,
+      address: address,
       balanceTitle: 'Has a balance of :',
       balance: `${addressBalance} SOL`
     } 
@@ -66,10 +66,11 @@ const _getTerraAddressBalance = async (setAddressData: Dispatch<any>, address: s
       return `${item.denom}:${item.amount}/ `
     })
     const terraResponse = {
-      address: `Address # : ${address}`,
-      balance: `Has a balance of : ${addressBalanceToString}`
+      addressTitle: 'Terra address #',
+      address: address,
+      balanceTitle: 'Has a balance of :',
+      balance: addressBalanceToString
     } 
-    //Method that terra documentation uses:  addressBalance.toData()
     setAddressData(terraResponse)
     
     return terraResponse
@@ -89,7 +90,7 @@ const _getAlgorandAddressBalance = async (setAddressData: Dispatch<any>, address
     let responseData = await serviceObject.getSingleData(algorandService, address)
     const algorandResponse = {
       addressTitle: 'Algorand address #',
-      address: `${address}`,
+      address: address,
       balanceTitle: 'Has a balance of :',
       balance: `${responseData.account.amount} ALGO`
     } 
