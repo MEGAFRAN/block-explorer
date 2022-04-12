@@ -29,7 +29,6 @@ body {
     padding: 0 $padding-main-size;
   
     &:hover {
-      cursor: pointer;
       color: $primary-fucsia;
     }
   
@@ -47,6 +46,10 @@ body {
 
   input[type="radio"] {
     display: none;
+
+    &:checked + label{
+      color: $primary-fucsia;
+    }
   }
     
   label {
@@ -57,6 +60,7 @@ body {
     padding: 12px;
 
     &:hover {
+      
       cursor: pointer;
       color: $primary-fucsia;
     }
